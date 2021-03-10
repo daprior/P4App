@@ -1,6 +1,6 @@
 package com.example.p4projectdaniel.ui.sell;
 
-import android.app.ProgressDialog;
+
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -90,8 +90,6 @@ public class SellFragment extends Fragment {
                 } else {
                     uploadFile();
                 }
-
-
             }
         });
         return v;

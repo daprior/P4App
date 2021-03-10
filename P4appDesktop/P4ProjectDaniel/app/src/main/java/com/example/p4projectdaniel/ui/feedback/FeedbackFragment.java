@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.p4projectdaniel.R;
@@ -25,10 +26,11 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener{
     private String Name;
     private String Email;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feedback,
-                container, false);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_feedback, container, false);
+
         buttonSend = (Button) view.findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(this);
         return view;

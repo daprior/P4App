@@ -4,32 +4,88 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p4projectdaniel.ImageAdapter;
 import com.example.p4projectdaniel.R;
+import com.example.p4projectdaniel.Upload;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private RecyclerView mRecyclerView;
+    private ImageAdapter mAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    private ProgressBar mProgressCircle;
+
+    private FirebaseStorage mStorage;
+    private DatabaseReference mDatabaseRef;
+    private ValueEventListener mDBListener;
+
+    private List<Upload> mUploads;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mRecyclerView = v.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mProgressCircle = v.findViewById(R.id.progress_circle);
+
+        mUploads = new ArrayList<>();
+
+        mAdapter = new ImageAdapter(getActivity(), mUploads);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        //mAdapter.setOnItemClickListener(ImagesActivity.this);
+
+        mStorage = FirebaseStorage.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                mUploads.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    upload.setKey(postSnapshot.getKey());
+                    mUploads.add(upload);
+                }
+
+                mAdapter.notifyDataSetChanged();
+
+                mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
-        return root;
+        return v;
     }
 }
+

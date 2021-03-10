@@ -13,7 +13,7 @@
         android:theme="@style/Theme.P4ProjectDaniel">
         <activity
             android:name=".BottomNavActivity"
-            android:label="@string/title_activity_bottom_nav"></activity>
+            android:label="@string/title_activity_bottom_nav" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
