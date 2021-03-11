@@ -1,11 +1,14 @@
 package com.example.p4projectdaniel;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -73,6 +76,11 @@ public class BuyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
 
+        //Back Button ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         name = (TextView) findViewById(R.id.product_name);
         price = (TextView) findViewById(R.id.product_price);
         seller = (TextView) findViewById(R.id.product_seller);
@@ -106,7 +114,7 @@ public class BuyActivity extends AppCompatActivity {
             String desc = bundle.getStringExtra("desc");
             sEmail = bundle.getStringExtra("email");
             name.setText(pName);
-            price.setText("₹ " + pPrice);
+            price.setText("Dkk " + pPrice);
             seller.setText(sName);
             sellDate.setText(date);
             if (desc != null) {
@@ -159,10 +167,60 @@ public class BuyActivity extends AppCompatActivity {
         button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BuyActivity.this);
+                builder.setTitle("Alert!");
+                builder.setMessage("Deletion is permanent. Are you sure you want to delete?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteProduct();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog ad = builder.create();
+                ad.show();
+
             }
         });
     }
 
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
     private void deleteProduct(){
+        Upload selectedItem = mUploads.get(position);
+        final String selectedKey = selectedItem.getKey();
+
+        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
+        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                startActivity(new Intent(BuyActivity.this, BottomNavActivity.class));
+                mDatabaseRef.child(selectedKey).removeValue();
+                Toast.makeText(BuyActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
+                BuyActivity.this.finish();
+            }
+        });
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="396dp"
         android:layout_height="match_parent">
 
         <RelativeLayout
@@ -90,11 +90,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@+id/product_seller_tag"
+                android:layout_toRightOf="@+id/product_seller_tag"
                 android:fontFamily="sans-serif-black"
                 android:fontStyle="italic"
                 android:text="Seller"
-                android:textSize="15dp"
-                android:layout_toRightOf="@+id/product_seller_tag" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/product_date_tag"
@@ -119,19 +119,18 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@+id/product_seller_tag"
+                android:layout_toRightOf="@+id/product_seller_tag"
                 android:fontFamily="sans-serif-black"
                 android:fontStyle="italic"
                 android:text="Date"
-                android:textSize="15dp"
-                android:layout_toRightOf="@+id/product_seller_tag" />
+                android:textSize="15dp" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/product_date"
-                android:background="?android:attr/listDivider"
-                />
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/Description_tag"
@@ -145,7 +144,7 @@
                 android:fontStyle="italic"
                 android:text="Description"
                 android:textSize="20dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/Description"

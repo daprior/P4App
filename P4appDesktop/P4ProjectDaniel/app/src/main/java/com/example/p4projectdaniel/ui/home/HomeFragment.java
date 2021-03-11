@@ -1,5 +1,6 @@
 package com.example.p4projectdaniel.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
+    private GridLayoutManager mGridLayoutManager;
 
     private ProgressBar mProgressCircle;
 
@@ -46,8 +49,13 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         mRecyclerView = v.findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
+        //mRecyclerView.setHasFixedSize(true);
+
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         mProgressCircle = v.findViewById(R.id.progress_circle);
 
