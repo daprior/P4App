@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.p4projectdaniel.ui.home.HomeFragment;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>{
     private Context mContext;
     private List<Upload> mUploads;
 
@@ -88,6 +92,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                     bundle.putExtra("userName", current.getUserName());
                     bundle.putExtra("date", current.getDate());
                     bundle.putExtra("desc", current.getDesc());
+
+                    bundle.putExtra("location", current.getLocation());
+
                     bundle.putExtra("email", current.getEmail());
                     bundle.putExtra("key", current.getKey());
 
@@ -97,12 +104,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                     // buyFragment.setArguments(bundle);
 
 
-                   //((FragmentActivity) mContext)
+                    //((FragmentActivity) mContext)
 
 
                     //       .getSupportFragmentManager()
-                   //        .beginTransaction().replace(R.id.nav_host_fragment, buyFragment)
-                   //        .addToBackStack(null).commit();
+                    //        .beginTransaction().replace(R.id.nav_host_fragment, buyFragment)
+                    //        .addToBackStack(null).commit();
 
                 }
             });

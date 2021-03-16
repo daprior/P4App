@@ -3,9 +3,13 @@ package com.example.p4projectdaniel.ui.home;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
@@ -55,7 +59,6 @@ public class HomeFragment extends Fragment {
         //mRecyclerView.setHasFixedSize(true);
 
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         mProgressCircle = v.findViewById(R.id.progress_circle);
 
@@ -94,6 +97,7 @@ public class HomeFragment extends Fragment {
             }
         });
         return v;
+
     }
 }
 

@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,11 @@ public class SellFragment extends Fragment {
     private Button mButtonUpload;
     private EditText mEditTextFileName;
     private EditText mEditTextFilePrice;
+
+    private EditText mEditTextFileLocation;
+
+    private Spinner mSpinnerLocation;
+
     private ImageView mImageView;
     private TextView mDescription;
     private ProgressBar mProgressBar;
@@ -67,6 +74,10 @@ public class SellFragment extends Fragment {
         mButtonUpload = v.findViewById(R.id.button_upload);
         mEditTextFileName = v.findViewById(R.id.edit_text_file_name);
         mEditTextFilePrice = v.findViewById(R.id.edit_text_file_price);
+
+        mEditTextFileLocation = v.findViewById(R.id.Location);
+
+
         mImageView = v.findViewById(R.id.image_view);
         mProgressBar = v.findViewById(R.id.progress_bar);
         mDescription = v.findViewById(R.id.Description);
@@ -134,6 +145,12 @@ public class SellFragment extends Fragment {
             return;
         }
 
+        if (mEditTextFileLocation.getText().toString().trim().isEmpty()) {
+            mEditTextFileLocation.setError("Location required");
+            mEditTextFileLocation.requestFocus();
+            return;
+        }
+
         if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -158,12 +175,15 @@ public class SellFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), mEditTextFilePrice.getText().toString().trim(), mDescription.getText().toString().trim());
+                                            uri.toString(), mEditTextFilePrice.getText().toString().trim(),mEditTextFileLocation.getText().toString().trim(), mDescription.getText().toString().trim());
                                     String uploadId = mDatabaseRef.push().getKey();
                                     mDatabaseRef.child(uploadId).setValue(upload);
                                     mEditTextFileName.setText("");
                                     mEditTextFilePrice.setText("");
+
+                                    mEditTextFileLocation.setText(""); // til location, skal nok ikke være en edittext.
                                     mDescription.setText("");
+
 
                                 }
                             })
