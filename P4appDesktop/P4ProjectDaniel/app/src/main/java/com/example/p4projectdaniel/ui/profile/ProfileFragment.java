@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.p4projectdaniel.ItemForSaleActivity;
 import com.example.p4projectdaniel.MainActivity;
 import com.example.p4projectdaniel.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,14 @@ public class ProfileFragment extends Fragment{
             }
         });
 
+        v.findViewById(R.id.MyItemsForSaleBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ItemForSaleActivity.class);
+                startActivity(intent);
+            }
+        });
+
         v.findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -57,7 +66,6 @@ public class ProfileFragment extends Fragment{
            }
         });
         return v;
-
     }
 
 
