@@ -116,18 +116,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Description"
             android:layout_marginTop="20dp"
-            android:text="Location "
+            android:text="Mobile "
             android:gravity="center"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/Location"
+            android:id="@+id/Mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Location_tag"
             android:layout_marginTop="10dp"
-            android:hint="Enter location"
+            android:hint="Enter Mobile"
             android:gravity="center"
             android:lines="2"
             android:maxLength="400" />
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/Location"
+            android:layout_below="@+id/Mobile"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp" />
 

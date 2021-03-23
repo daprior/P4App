@@ -153,10 +153,38 @@
                 android:layout_below="@+id/Description_tag"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif"
                 android:fontStyle="italic"
                 android:hint="Description"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/Mobile_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Description"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-black"
+                android:fontStyle="italic"
+                android:text="Mobile"
+                android:textSize="20dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/Mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Mobile_tag"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="100dp"
+                android:fontFamily="sans-serif"
+                android:fontStyle="italic"
+                android:hint="Mobile"
                 android:textSize="15dp"
                 android:visibility="gone" />
 

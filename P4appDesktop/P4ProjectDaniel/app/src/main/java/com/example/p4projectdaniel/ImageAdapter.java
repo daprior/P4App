@@ -93,7 +93,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                     bundle.putExtra("date", current.getDate());
                     bundle.putExtra("desc", current.getDesc());
 
-                    bundle.putExtra("location", current.getLocation());
+                    bundle.putExtra("mobile", current.getMobile());
 
                     bundle.putExtra("email", current.getEmail());
                     bundle.putExtra("key", current.getKey());

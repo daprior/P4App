@@ -15,13 +15,13 @@ public class Upload {
     private String mPrice;
     private String mDate;
     private String mDesc;
-    private String mLocation;
+    private String mMobile;
 
     public Upload() {
         //empty constructor needed
     }
 
-    public Upload(String name, String imageUrl, String price, String desc, String location) {
+    public Upload(String name, String imageUrl, String price, String desc, String mobile) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
@@ -30,7 +30,7 @@ public class Upload {
         mImageUrl = imageUrl;
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         mDesc = desc;
-        mLocation = location;
+        mMobile = mobile;
         mUser = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mPrice = price;
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -64,8 +64,8 @@ public class Upload {
     public String getDesc() { return mDesc; }
     public void setDesc(String desc) { mDesc = desc; }
 
-    public String getLocation() { return mLocation; }
-    public void setLocation(String location) { mLocation = location; } // NY TIL LOCATION
+    public String getMobile() { return mMobile; }
+    public void setMobile(String mobile) { mMobile = mobile; } // NY TIL NUMMER
 
     public String getPrice() {return mPrice;}
     public void setPrice(String price) { mPrice = price;}

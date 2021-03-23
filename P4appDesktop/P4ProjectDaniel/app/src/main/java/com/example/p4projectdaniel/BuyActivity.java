@@ -38,6 +38,8 @@ public class BuyActivity extends AppCompatActivity {
     private TextView sellDate;
     private TextView Desc_tag;
     private TextView Desc_text;
+    private TextView Mobi_tag;
+    private TextView Mobi_text;
     private Button button_make_offer;
     private Button button_message;
     private Button button_delete;
@@ -45,6 +47,7 @@ public class BuyActivity extends AppCompatActivity {
     private String sName;
     private String sEmail;
     private String pName;
+    private String mobile;
     private String bName;
     private String bEmail;
     private int position;
@@ -92,6 +95,12 @@ public class BuyActivity extends AppCompatActivity {
         pImage = (ImageView) findViewById(R.id.product_image);
         Desc_tag = (TextView) findViewById(R.id.Description_tag);
         Desc_text = (TextView) findViewById(R.id.Description);
+
+
+        Mobi_tag = (TextView) findViewById(R.id.Mobile_tag); //MOBIL
+        Mobi_text = (TextView) findViewById(R.id.Mobile); // MOBIL
+
+
         bName = mAuth.getInstance().getCurrentUser().getDisplayName();
         bEmail = mAuth.getInstance().getCurrentUser().getEmail();
 
@@ -112,6 +121,9 @@ public class BuyActivity extends AppCompatActivity {
             key = bundle.getStringExtra("key");
             String date = bundle.getStringExtra("date");
             String desc = bundle.getStringExtra("desc");
+
+            String mobile = bundle.getStringExtra("mobile");
+
             sEmail = bundle.getStringExtra("email");
             name.setText(pName);
             price.setText("Dkk " + pPrice);
@@ -122,8 +134,11 @@ public class BuyActivity extends AppCompatActivity {
                 Desc_text.setVisibility(View.VISIBLE);
                 Desc_text.setText(desc);
             }
-
-
+            if (mobile != null) {
+                Mobi_tag.setVisibility(View.VISIBLE);
+                Mobi_text.setVisibility(View.VISIBLE);
+                Mobi_text.setText(mobile);
+            }
             if (pImageUrl != null) {
                 String photoUrl = pImageUrl;
                 Picasso.get()

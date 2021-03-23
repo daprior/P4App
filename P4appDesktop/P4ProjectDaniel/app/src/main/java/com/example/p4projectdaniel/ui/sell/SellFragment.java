@@ -51,7 +51,7 @@ public class SellFragment extends Fragment {
     private EditText mEditTextFileName;
     private EditText mEditTextFilePrice;
 
-    private EditText mEditTextFileLocation;
+    private EditText mEditTextFileMobile;
 
     private Spinner mSpinnerLocation;
 
@@ -74,13 +74,12 @@ public class SellFragment extends Fragment {
         mButtonUpload = v.findViewById(R.id.button_upload);
         mEditTextFileName = v.findViewById(R.id.edit_text_file_name);
         mEditTextFilePrice = v.findViewById(R.id.edit_text_file_price);
-
-        mEditTextFileLocation = v.findViewById(R.id.Location);
-
-
         mImageView = v.findViewById(R.id.image_view);
         mProgressBar = v.findViewById(R.id.progress_bar);
         mDescription = v.findViewById(R.id.Description);
+
+        mEditTextFileMobile = v.findViewById(R.id.Mobile);
+
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
@@ -145,9 +144,9 @@ public class SellFragment extends Fragment {
             return;
         }
 
-        if (mEditTextFileLocation.getText().toString().trim().isEmpty()) {
-            mEditTextFileLocation.setError("Location required");
-            mEditTextFileLocation.requestFocus();
+        if (mEditTextFileMobile.getText().toString().trim().isEmpty()) {
+            mEditTextFileMobile.setError("Mobile required");
+            mEditTextFileMobile.requestFocus();
             return;
         }
 
@@ -175,14 +174,13 @@ public class SellFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), mEditTextFilePrice.getText().toString().trim(),mEditTextFileLocation.getText().toString().trim(), mDescription.getText().toString().trim());
+                                            uri.toString(), mEditTextFilePrice.getText().toString().trim(), mDescription.getText().toString().trim(),mEditTextFileMobile.getText().toString().trim());
                                     String uploadId = mDatabaseRef.push().getKey();
                                     mDatabaseRef.child(uploadId).setValue(upload);
                                     mEditTextFileName.setText("");
                                     mEditTextFilePrice.setText("");
-
-                                    mEditTextFileLocation.setText(""); // til location, skal nok ikke være en edittext.
                                     mDescription.setText("");
+                                    mEditTextFileMobile.setText(""); // til mobile, skal nok ikke være en edittext.
 
 
                                 }
@@ -193,8 +191,6 @@ public class SellFragment extends Fragment {
                                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
