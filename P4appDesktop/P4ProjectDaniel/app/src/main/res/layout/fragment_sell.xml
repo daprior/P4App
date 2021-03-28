@@ -132,6 +132,22 @@
             android:lines="2"
             android:maxLength="400" />
 
+        <Spinner
+            android:id="@+id/locationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Mobile"
+            android:layout_marginTop="1dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/TxtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_below="@id/locationSpinner"/>
+
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -139,7 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/Mobile"
+            android:layout_below="@+id/TxtLocation"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp" />
 

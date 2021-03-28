@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,9 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.app.Activity.RESULT_OK;
 
 public class SellFragment extends Fragment {
@@ -54,6 +58,7 @@ public class SellFragment extends Fragment {
     private EditText mEditTextFileMobile;
 
     private Spinner mSpinnerLocation;
+    private TextView mSpinnerText;
 
     private ImageView mImageView;
     private TextView mDescription;
@@ -82,6 +87,33 @@ public class SellFragment extends Fragment {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+
+        mSpinnerLocation = v.findViewById(R.id.locationSpinner);
+        mSpinnerText = v.findViewById(R.id.TxtLocation);
+
+        List<String> location = new ArrayList<>();
+        location.add("Aalborg Centrum");
+        location.add("Aalborg Havnefront");
+        location.add("Aalborg Øst");
+
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_spinner_item, location);
+        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerLocation.setAdapter(locationAdapter);
+
+        mSpinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String myLocation = mSpinnerLocation.getSelectedItem().toString();
+                if (!myLocation.equals("")); {
+                    mSpinnerText.setText(myLocation);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
@@ -113,18 +145,21 @@ public class SellFragment extends Fragment {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
+                && data != null && data.getData() != null){
             mImageUri = data.getData();
-            //cropImage();
+
 
             Picasso.get().load(mImageUri).into(mImageView);
         }
     }
+
+
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getActivity().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
@@ -173,14 +208,22 @@ public class SellFragment extends Fragment {
                             taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            uri.toString(), mEditTextFilePrice.getText().toString().trim(), mDescription.getText().toString().trim(),mEditTextFileMobile.getText().toString().trim());
+                                    Upload upload = new Upload(
+                                            mEditTextFileName.getText().toString().trim(),
+                                            uri.toString(),
+                                            mEditTextFilePrice.getText().toString().trim(),
+                                            mDescription.getText().toString().trim(),
+                                            mEditTextFileMobile.getText().toString().trim(),
+                                            mSpinnerText.getText().toString().trim());
                                     String uploadId = mDatabaseRef.push().getKey();
                                     mDatabaseRef.child(uploadId).setValue(upload);
+
                                     mEditTextFileName.setText("");
                                     mEditTextFilePrice.setText("");
                                     mDescription.setText("");
                                     mEditTextFileMobile.setText(""); // til mobile, skal nok ikke være en edittext.
+
+                                    mSpinnerText.setText(""); // TIL LOCATION
 
 
                                 }

@@ -1,16 +1,20 @@
 package com.example.p4projectdaniel.ui.profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +22,23 @@ import com.example.p4projectdaniel.ItemForSaleActivity;
 import com.example.p4projectdaniel.MainActivity;
 import com.example.p4projectdaniel.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 
-public class ProfileFragment extends Fragment{
+public class ProfileFragment extends Fragment {
 
     TextView textView, textViewEmail;
     EditText editText;
@@ -51,19 +65,19 @@ public class ProfileFragment extends Fragment{
             }
         });
 
-        v.findViewById(R.id.MyItemsForSaleBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ItemForSaleActivity.class);
-                startActivity(intent);
-            }
-        });
+        //v.findViewById(R.id.MyItemsForSaleBtn).setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        Intent intent = new Intent(getActivity(), ItemForSaleActivity.class);
+        //        startActivity(intent);
+        //    }
+        //});
 
         v.findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               saveUserInformation();
-           }
+            @Override
+            public void onClick(View v) {
+                saveUserInformation();
+            }
         });
         return v;
     }
@@ -78,9 +92,7 @@ public class ProfileFragment extends Fragment{
                 String displayName = user.getDisplayName();
                 editText.setText(displayName);
             }
-
         }
-
     }
 
 
@@ -100,6 +112,7 @@ public class ProfileFragment extends Fragment{
                     .setDisplayName(displayName)
                     .build();
 
+
             user.updateProfile(profile)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -117,6 +130,6 @@ public class ProfileFragment extends Fragment{
             Toast.makeText(getActivity(), "Some error occured", Toast.LENGTH_LONG).show();
             return;
         }
-
     }
+
 }

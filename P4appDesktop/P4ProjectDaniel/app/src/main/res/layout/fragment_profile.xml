@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment">
 
+
     <TextView
         android:id="@+id/text_profile"
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -23,11 +24,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/name_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:text="Name"
         android:textSize="20dp"
@@ -36,16 +38,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615" />
+        app:layout_constraintVertical_bias="0.984" />
 
     <EditText
         android:id="@+id/editTextDisplayName"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="123dp"
+        android:layout_marginTop="104dp"
         android:autofillHints=""
-        android:gravity="center"
         android:fontFamily="sans-serif"
+        android:gravity="center"
         android:hint="Enter Display Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +60,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_tag"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="email_id"
         android:textSize="15dp"
@@ -66,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDisplayName"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -85,31 +87,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_email"
-        app:layout_constraintVertical_bias="0.121" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/LogOutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="logout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="96dp"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:text="Log Out"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSave"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/MyItemsForSaleBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Items For sale"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
