@@ -93,6 +93,7 @@ public class SellFragment extends Fragment {
         mSpinnerText = v.findViewById(R.id.TxtLocation);
 
         List<String> location = new ArrayList<>();
+        location.add("");
         location.add("Aalborg Centrum");
         location.add("Aalborg Havnefront");
         location.add("Aalborg Øst");

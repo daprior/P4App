@@ -40,6 +40,8 @@ public class BuyActivity extends AppCompatActivity {
     private TextView Desc_text;
     private TextView Mobi_tag;
     private TextView Mobi_text;
+    private TextView Loca_tag;
+    private TextView Loca_text;
     private Button button_make_offer;
     private Button button_message;
     private Button button_delete;
@@ -48,6 +50,7 @@ public class BuyActivity extends AppCompatActivity {
     private String sEmail;
     private String pName;
     private String mobile;
+    private String location;
     private String bName;
     private String bEmail;
     private int position;
@@ -67,8 +70,8 @@ public class BuyActivity extends AppCompatActivity {
         super.onStart();
         String testEmail = mAuth.getInstance().getCurrentUser().getEmail();
         if (testEmail.equals(sEmail)) {
-            button_make_offer.setVisibility(View.GONE);
-            button_message.setVisibility(View.GONE);
+            //button_make_offer.setVisibility(View.GONE);
+            //button_message.setVisibility(View.GONE);
             button_delete.setVisibility(View.VISIBLE);
             Toast.makeText(getApplicationContext(), "You are seller of this product", Toast.LENGTH_SHORT).show();
         }
@@ -88,8 +91,8 @@ public class BuyActivity extends AppCompatActivity {
         price = (TextView) findViewById(R.id.product_price);
         seller = (TextView) findViewById(R.id.product_seller);
         sellDate = (TextView) findViewById(R.id.product_date);
-        button_make_offer = (Button) findViewById(R.id.offer_button);
-        button_message = (Button) findViewById(R.id.msg_button);
+        //button_make_offer = (Button) findViewById(R.id.offer_button);
+        //button_message = (Button) findViewById(R.id.msg_button);
         button_delete = (Button) findViewById(R.id.delete_button);
 
         pImage = (ImageView) findViewById(R.id.product_image);
@@ -99,6 +102,9 @@ public class BuyActivity extends AppCompatActivity {
 
         Mobi_tag = (TextView) findViewById(R.id.Mobile_tag); //MOBIL
         Mobi_text = (TextView) findViewById(R.id.Mobile); // MOBIL
+
+        Loca_tag = (TextView) findViewById(R.id.Location_overskrift); //Location
+        Loca_text = (TextView) findViewById(R.id.Location_tekst); // Location
 
 
         bName = mAuth.getInstance().getCurrentUser().getDisplayName();
@@ -113,6 +119,7 @@ public class BuyActivity extends AppCompatActivity {
         Intent bundle = getIntent();
         if (bundle != null) {
             position = bundle.getIntExtra("position", 0);
+
             pName = bundle.getStringExtra("name");
             String pImageUrl = bundle.getStringExtra("imageUrl");
             String pPrice = bundle.getStringExtra("price");
@@ -123,6 +130,7 @@ public class BuyActivity extends AppCompatActivity {
             String desc = bundle.getStringExtra("desc");
 
             String mobile = bundle.getStringExtra("mobile");
+            String location = bundle.getStringExtra("location");
 
             sEmail = bundle.getStringExtra("email");
             name.setText(pName);
@@ -139,6 +147,13 @@ public class BuyActivity extends AppCompatActivity {
                 Mobi_text.setVisibility(View.VISIBLE);
                 Mobi_text.setText(mobile);
             }
+
+            if (location != null) {
+                Loca_tag.setVisibility(View.VISIBLE);
+                Loca_text.setVisibility(View.VISIBLE);
+                Loca_text.setText(location);
+            }
+
             if (pImageUrl != null) {
                 String photoUrl = pImageUrl;
                 Picasso.get()
@@ -148,11 +163,11 @@ public class BuyActivity extends AppCompatActivity {
         }
 
 
-        button_make_offer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        //button_make_offer.setOnClickListener(new View.OnClickListener() {
+        //   @Override
+        //    public void onClick(View v) {
+        //    }
+        //});
 
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -173,11 +188,11 @@ public class BuyActivity extends AppCompatActivity {
             }
         });
 
-        button_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        //button_message.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //    }
+        //});
 
         button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,7 +218,6 @@ public class BuyActivity extends AppCompatActivity {
 
                 AlertDialog ad = builder.create();
                 ad.show();
-
             }
         });
     }
