@@ -88,7 +88,6 @@ public class SellFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
-
         mSpinnerLocation = v.findViewById(R.id.locationSpinner);
         mSpinnerText = v.findViewById(R.id.TxtLocation);
 
@@ -222,7 +221,7 @@ public class SellFragment extends Fragment {
                                     mEditTextFileName.setText("");
                                     mEditTextFilePrice.setText("");
                                     mDescription.setText("");
-                                    mEditTextFileMobile.setText(""); // til mobile, skal nok ikke være en edittext.
+                                    mEditTextFileMobile.setText(""); // til mobile
 
                                     mSpinnerText.setText(""); // TIL LOCATION
 
