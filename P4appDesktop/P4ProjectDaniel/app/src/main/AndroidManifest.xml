@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo_final"
@@ -11,7 +15,8 @@
         android:roundIcon="@drawable/ic_logo_final"
         android:supportsRtl="true"
         android:theme="@style/Theme.P4ProjectDaniel">
-        <activity android:name=".ItemForSaleActivity"></activity>
+        <activity android:name=".kort_activity"></activity>
+        <activity android:name=".ItemForSaleActivity" />
         <activity android:name=".BuyActivity" />
         <activity
             android:name=".BottomNavActivity"

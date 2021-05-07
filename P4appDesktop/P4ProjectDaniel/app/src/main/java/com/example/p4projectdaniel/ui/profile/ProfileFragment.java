@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class ProfileFragment extends Fragment {
     TextView textView, textViewEmail;
     EditText editText;
     FirebaseAuth mAuth;
+    Button mapBtn;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,13 +67,14 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        //v.findViewById(R.id.MyItemsForSaleBtn).setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        Intent intent = new Intent(getActivity(), ItemForSaleActivity.class);
-        //        startActivity(intent);
-        //    }
-        //});
+
+        v.findViewById(R.id.kortBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), );
+                startActivity(intent);
+            }
+        });
 
         v.findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
