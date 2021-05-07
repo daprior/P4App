@@ -25,9 +25,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
-    public final LatLng molok1 = new LatLng(57.025546, 9.959746);
-    public final LatLng molok2 = new LatLng(57.026015, 9.959093);
-    public final LatLng molok3 = new LatLng(57.026152, 9.959249);
+    public final LatLng molok1 = new LatLng(57.0485,  9.9286);
+    public final LatLng molok2 = new LatLng(57.0455, 9.9151);
+    public final LatLng molok3 = new LatLng(57.0421,  9.9422);
 
 
     public Marker markerMolok1;
@@ -73,15 +73,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        markerMolok1 = mMap.addMarker(new MarkerOptions().position(molok1).title("Hadsundvej 182A"));
+        markerMolok1 = mMap.addMarker(new MarkerOptions().position(molok1).title("Aalborg Havnefront"));
         markerMolok1.setTag(0);
         markerMolok1.setIcon(trashCan);
 
-        markerMolok2 = mMap.addMarker(new MarkerOptions().position(molok2).title("Hadsundvej 182B"));
+        markerMolok2 = mMap.addMarker(new MarkerOptions().position(molok2).title("Aalborg Centrum"));
         markerMolok2.setTag(1);
         markerMolok2.setIcon(trashCan);
 
-        markerMolok3 = mMap.addMarker(new MarkerOptions().position(molok3).title("Hadsundvej 182C"));
+        markerMolok3 = mMap.addMarker(new MarkerOptions().position(molok3).title("Aalborg Øst"));
         markerMolok3.setTag(1);
         markerMolok3.setIcon(trashCan);
 
@@ -103,7 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             clickCount = clickCount + 1;
             marker.setTag(clickCount);
             Toast.makeText(this, marker.getTitle() +
-                    " has been clicked " + clickCount + " times.", Toast.LENGTH_SHORT).show();
+                    " Er valgt ", Toast.LENGTH_SHORT).show();
         }
 
         // Return false to indicate that we have not consumed the event and that we wish
