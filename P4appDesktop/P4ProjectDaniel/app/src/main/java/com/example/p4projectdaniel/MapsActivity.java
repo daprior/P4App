@@ -1,7 +1,6 @@
 package com.example.p4projectdaniel;
 
 import androidx.annotation.DrawableRes;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -22,9 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-//bases on https://developers.google.com/maps/documentation/android-sdk/marker
-
-public class kort_activity extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -42,8 +39,8 @@ public class kort_activity extends FragmentActivity implements GoogleMap.OnMarke
     //based on https://stackoverflow.com/questions/42365658/custom-marker-in-google-maps-in-android-with-vector-asset-icon
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId, float zoom) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
-        int w = (int) (zoom * vectorDrawable.getIntrinsicWidth());
-        int h = (int) (zoom * vectorDrawable.getIntrinsicHeight());
+        int w = (int)(zoom*vectorDrawable.getIntrinsicWidth());
+        int h = (int)(zoom*vectorDrawable.getIntrinsicHeight());
         vectorDrawable.setBounds(0, 0, w, h);
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -55,14 +52,12 @@ public class kort_activity extends FragmentActivity implements GoogleMap.OnMarke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kort_activity);
+        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        trashCan = bitmapDescriptorFromVector(this, R.drawable.ic_baseline_restore_from_trash_24, 2.0f);
-
-
+        trashCan = bitmapDescriptorFromVector(this,R.drawable.ic_baseline_restore_from_trash_24,2.0f);
     }
 
     /**
@@ -91,8 +86,9 @@ public class kort_activity extends FragmentActivity implements GoogleMap.OnMarke
         markerMolok3.setIcon(trashCan);
 
 
+
         // Set a listener for marker click.
-        mMap.setOnMarkerClickListener(this);
+        mMap.setOnMarkerClickListener( this);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(molok1));
     }
 
@@ -114,5 +110,10 @@ public class kort_activity extends FragmentActivity implements GoogleMap.OnMarke
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
         return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
