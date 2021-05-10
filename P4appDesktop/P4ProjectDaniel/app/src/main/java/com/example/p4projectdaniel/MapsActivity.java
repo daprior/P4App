@@ -25,16 +25,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
-    public final LatLng molok1 = new LatLng(57.0485,  9.9286);
-    public final LatLng molok2 = new LatLng(57.0455, 9.9151);
-    public final LatLng molok3 = new LatLng(57.0421,  9.9422);
+    public final LatLng lokation1 = new LatLng(57.0485,  9.9286);
+    public final LatLng lokation2 = new LatLng(57.0455, 9.9151);
+    public final LatLng lokation3 = new LatLng(57.0421,  9.9422);
 
 
-    public Marker markerMolok1;
-    public Marker markerMolok2;
-    public Marker markerMolok3;
+    public Marker markerlokation1;
+    public Marker markerlokation2;
+    public Marker markerlokation3;
 
-    private BitmapDescriptor trashCan;
+    private BitmapDescriptor Loop;
 
     //based on https://stackoverflow.com/questions/42365658/custom-marker-in-google-maps-in-android-with-vector-asset-icon
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId, float zoom) {
@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        trashCan = bitmapDescriptorFromVector(this,R.drawable.ic_baseline_restore_from_trash_24,2.0f);
+        Loop = bitmapDescriptorFromVector(this,R.drawable.ic_baseline_restore_from_trash_24,2.0f);
     }
 
     /**
@@ -73,23 +73,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        markerMolok1 = mMap.addMarker(new MarkerOptions().position(molok1).title("Aalborg Havnefront"));
-        markerMolok1.setTag(0);
-        markerMolok1.setIcon(trashCan);
+        markerlokation1 = mMap.addMarker(new MarkerOptions().position(lokation1).title("Aalborg Havnefront"));
+        markerlokation1.setTag(0);
+        markerlokation1.setIcon(Loop);
 
-        markerMolok2 = mMap.addMarker(new MarkerOptions().position(molok2).title("Aalborg Centrum"));
-        markerMolok2.setTag(1);
-        markerMolok2.setIcon(trashCan);
+        markerlokation2 = mMap.addMarker(new MarkerOptions().position(lokation2).title("Aalborg Centrum"));
+        markerlokation2.setTag(1);
+        markerlokation2.setIcon(Loop);
 
-        markerMolok3 = mMap.addMarker(new MarkerOptions().position(molok3).title("Aalborg Øst"));
-        markerMolok3.setTag(1);
-        markerMolok3.setIcon(trashCan);
+        markerlokation3 = mMap.addMarker(new MarkerOptions().position(lokation3).title("Aalborg Øst"));
+        markerlokation3.setTag(1);
+        markerlokation3.setIcon(Loop);
 
 
 
         // Set a listener for marker click.
         mMap.setOnMarkerClickListener( this);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(molok1));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(lokation1));
     }
 
     @Override
